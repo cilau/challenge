@@ -23,7 +23,12 @@
 	"dependencies": {
 		"mocha": "latest",
 		"underscore": "latest",
-		"should": "latest"
+		"should": "latest",
+		"xml2js": "latest",
+		"moment": "latest",
+		"request": "latest",
+		"cheerio": "latest",
+		"iso-countries": "latest"
 	},
 	"devDependencies": {
 		"mocha": "latest",

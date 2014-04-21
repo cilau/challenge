@@ -3,13 +3,12 @@ var should = require('should'),
 	Courier = require('../lib/index');
 
 describe('Test: .is', function() {
-
+	this.timeout(15000);
 	// Courier: http://www.usps.com
 	// Hints: You can apply the API from their web site
 	// Time need: less than an hour if you have the api key
 
 	describe('Track @ usps(\'9102999999302024326992\')', function() {
-
 		var usps = {
 			checkpoints: [
 				{
@@ -19,9 +18,11 @@ describe('Test: .is', function() {
 				}
 			]
 		};
-		it('Expect return true', function() {
-			var result = Courier.usps('1ZXF68280392966078');
-			result.should.eql(usps);
+		it('Expect return true', function(done) {
+			var result = Courier.usps('9102999999302024326992', function(response){
+				response.should.eql(usps);
+				done();
+			});
 		});
 	});
 
@@ -41,7 +42,7 @@ describe('Test: .is', function() {
 				{
 					country_name: 'HK',
 					message: 'In transit.',
-					checkpoint_time: '2013-12-12T00:00:00'
+					checkpoint_time: '2013-12-11T00:00:00'
 				},
 				{
 					country_name: 'HK',
@@ -50,7 +51,7 @@ describe('Test: .is', function() {
 				},
 				{
 					country_name: 'HK',
-					message: 'The item left Hong Kong for its destination on  19-Dec-2013 ',
+					message: 'The item left Hong Kong for its destination on 19-Dec-2013',
 					checkpoint_time: '2013-12-17T00:00:00'
 				},
 				{
@@ -61,19 +62,21 @@ describe('Test: .is', function() {
 				{
 					country_name: 'NZ',
 					message: 'In transit.',
-					checkpoint_time: '2014-01-15T00:00:00'
+					checkpoint_time: '2014-01-14T00:00:00'
 				},
 				{
 					country_name: 'NZ',
 					message: 'Delivered.',
-					checkpoint_time: '2014-01-16T00:00:00'
+					checkpoint_time: '2014-01-15T00:00:00'
 				}
 			]
 		};
 
-		it('Expect return true', function() {
-			var result = Courier.hkpost('CP889331175HK');
-			result.should.eql(hkpost);
+		it('Expect return true', function(done) {
+			var result = Courier.hkpost('CP889331175HK', function(response){
+				response.should.eql(hkpost);
+				done();
+			});
 		});
 	});
 
@@ -138,12 +141,13 @@ describe('Test: .is', function() {
 				message: 'The parcel has been delivered, signed for by BILAL',
 				checkpoint_time: '2014-01-15T19:23:00'
 			}
-		]
-		};
+		]};
 
-		it('Expect return true', function() {
-			var result = Courier.dpduk('15502370264989N');
-			result.should.eql(dpduk);
+		it('Expect return true', function(done) {
+			var result = Courier.dpduk('15502370264989N', function(response){
+				response.should.eql(dpduk);
+				done();
+			});
 		});
 	});
 });
